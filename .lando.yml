@@ -1,0 +1,40 @@
+name: elasticlando
+env_file:
+  - .env
+services:
+  node:
+    type: node
+  elasticsearch:
+    type: compose
+    user: root
+    services:
+      image: elasticsearch:1.7.4
+      command: "/docker-entrypoint.sh - elasticsearch"
+      user: elasticsearch
+      ports:
+        - "9200:9200"
+      volumes:
+        - 'config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml'
+        - '/Users/alec/workspace/elasticlando-storage:/usr/share/elasticsearch/data'
+      networks:
+        - elasticsearch
+  kibana:
+    type: compose
+    user: root
+    services:
+      image: kibana:4.1.11
+      command: "kibana"
+      user: kibana
+      ports:
+        - "5601:5601"
+      networks:
+        - elasticsearch
+      environment:
+        NODE_OPTIONS: '--max-old-space-size=4096'
+    networks:
+      elasticsearch:
+proxy:
+  elasticsearch:
+    - elasticsearch-project.lndo.site:9200
+  kibana:
+    - elastisearch-kibana.lndo.site:5601

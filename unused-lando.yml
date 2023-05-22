@@ -1,0 +1,9 @@
+kibana:
+  type: compose
+  user: root
+  services:
+    image: kibana:7.17.9
+    command: "/bin/tini -- /usr/local/bin/kibana-docker"
+    user: kibana
+    ports:
+      - "5601:5601"

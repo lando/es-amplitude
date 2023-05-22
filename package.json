@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.7.0",
+    "elasticsearch": "10.1.2",
+    "lodash": "^4.17.21",
+    "node-fetch": "2"
+  }
+}
