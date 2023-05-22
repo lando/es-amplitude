@@ -103,5 +103,9 @@ async function fetchElasticData(size = 10, startDate = "2023-01-01T00:00:00") {
     );
   }
 }
-
-fetchElasticData(10, "2022-07-26T00:02:50.006Z");
+var startDate = process.argv[2] ? process.argv[2] : false;
+if (startDate) {
+  fetchElasticData(10, startDate);
+} else {
+  console.log("No start date provided, please provide one. Ex: 2022-09-26T00:02:50.006Z");
+}
